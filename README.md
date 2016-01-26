@@ -16,10 +16,15 @@ Specific commands will be given below to do these.
 ### Mac OS X
 
 > brew install apache-spark
+
 > brew install scala
+
 > git clone https://github.com/allenday/spark-genome-alignment-demo.git
+
 > cd spark-genome-alignment-demo
+
 > mkdir build
+
 > cd build
 > mkdir data
 > git clone https://github.com/BenLangmead/bowtie.git
