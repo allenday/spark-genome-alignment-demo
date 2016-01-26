@@ -12,7 +12,7 @@ Specific commands will be given below to do these.
 4. Download the E.coli genome
 5. Index the E.coli genome with Bowtie
 
-## Installation script
+## Installation
 
 ### Mac OS X
 
@@ -26,6 +26,8 @@ Now we're ready to get to work:
     brew install scala
     git clone https://github.com/allenday/spark-genome-alignment-demo.git
     cd spark-genome-alignment-demo
+    #we'll assume that wherever you are now is where you want to work
+    export DEMO=`pwd`
     mkdir -p build/data
     cd build
     git clone https://github.com/BenLangmead/bowtie.git
@@ -41,6 +43,7 @@ Now we're ready to get to work:
     export SPARK_HOME=/usr/local/Cellar/apache-spark/1.4.1
     cd adam
     mvn package install
-
+    export ADAM_HOME=`pwd`
+    cd ..
 
 ## How to run the demo.
