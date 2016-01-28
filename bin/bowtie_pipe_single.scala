@@ -11,7 +11,7 @@ import org.bdgenomics.adam.models.SequenceDictionary
 val ac = new org.bdgenomics.adam.rdd.ADAMContext(sc)
 
 val reads = ac.loadAlignments(sys.env("DEMO")+"/build/data/reads.fq").rdd
-val relative_script = "bowtie_single.pl"
+val relative_script = "bowtie_wrapper_single.pl"
 val absolute_script = sys.env("DEMO")+"/bin/" + relative_script
 val piped_reads = reads.pipe(absolute_script)
 

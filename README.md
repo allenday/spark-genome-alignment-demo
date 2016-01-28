@@ -29,21 +29,28 @@ Now we're ready to get to work:
     #we'll assume that wherever you are now is where you want to work
     export DEMO=`pwd`
     mkdir -p build/data
-    cd build
+    cd $DEMO/build
     git clone https://github.com/BenLangmead/bowtie.git
-    cd bowtie
+    cd $DEMO/build/bowtie
     make
-    ./bowtie-build genomes/NC_008253.fna ../data/NC_008253
-    cat genomes/NC_008253.fna | sort | tail -50 | perl -ne 'chomp;$q=$_;$q=~s/./B/g;printf qq(\@read%i\n%s\n+\n%s\n), ($., $_, $q)' > ../data/reads.fq
+    ./bowtie-build genomes/NC_008253.fna $DEMO/build/data/NC_008253
+    cat genomes/NC_008253.fna | sort | tail -50 | perl -ne 'chomp;$q=$_;$q=~s/./B/g;printf qq(\@read%i\n%s\n+\n%s\n), ($., $_, $q)' > $DEMO/build/data/reads.fq
     #verify bowtie functions as expected
-    cat ../data/reads.fq | ./bowtie ../data/NC_008253 - | md5sum
+    cat $DEMO/build/data/reads.fq | ./bowtie $DEMO/build/data/NC_008253 - | md5sum
     #should yield ecd5e41dea9692446fa4ae4170d6a1e1
-    cd ..
+    cd $DEMO/build
     git clone https://github.com/bigdatagenomics/adam.git
     export SPARK_HOME=/usr/local/Cellar/apache-spark/1.4.1
-    cd adam
+    cd $DEMO/build/adam
     mvn package install
     export ADAM_HOME=`pwd`
-    cd ..
 
 ## How to run the demo.
+
+    cat $DEMO/bin/bowtie_pipe_single.scala | $ADAM_HOME/bin/adam-shell
+    cat $DEMO/build/data/reads.sam | md5sum
+    #should yield 6eebbde8d7818136e9ab924d57af8005
+
+    #examine the outputs
+    head $DEMO/build/data/reads.sam
+
