@@ -12,6 +12,7 @@ Specifically what is being done below:
   * [Scala](http://www.scala-lang.org/)
   * [Bowtie](http://bowtie-bio.sourceforge.net/index.shtml)
   * [Big Data Genomics](http://bdgenomics.org/) [ADAM](https://github.com/bigdatagenomics/adam)
+
 2. Index the E.coli genome ([NC_008253](http://www.ncbi.nlm.nih.gov/nuccore/110640213?report=fasta)) that ships with Bowtie
 3. Generate a set of positive-control [FastQ](https://en.wikipedia.org/wiki/FASTQ_format) reads from NC_008253
 4. Launch spark-shell, the interactive interface to Spark
