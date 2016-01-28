@@ -1,22 +1,28 @@
 # spark-genome-alignment-demo
-An example of bioinformatics and bigdata tools can playing nicely together
+An example of bioinformatics and bigdata tools can playing nicely together.
 
-## Requirements
+You can copy and paste the relevant section below (currently Mac OS X only)
+to see how the Bowtie aligner can be integrated into an interactive Spark
+program for doing bioinformatics work in a BigData environment.
 
-Specific commands will be given below to do these.
+Specifically what is being done below:
+1. Build and install prerequisites 
+  * package manager (as needed)
+  * [Apache Spark](http://spark.apache.org/)
+  * [Scala](http://www.scala-lang.org/)
+  * [Bowtie](http://bowtie-bio.sourceforge.net/index.shtml)
+  * [Big Data Genomics](http://bdgenomics.org/) [ADAM](https://github.com/bigdatagenomics/adam)
+2. Index the E.coli genome ([NC_008253](http://www.ncbi.nlm.nih.gov/nuccore/110640213?report=fasta)) that ships with Bowtie
+3. Generate a set of positive-control [FastQ](https://en.wikipedia.org/wiki/FASTQ_format) reads from NC_008253
+4. Launch spark-shell, the interactive interface to Spark
+5. Align the control reads with Bowtie from spark-shell
+6. Write the aligned reads out in [SAM](https://samtools.github.io/hts-specs/SAMv1.pdf) format
 
-0. Install Homebrew (Mac OS X only)
-1. Install Spark
-2. Download and get ADAM working
-3. Download and compile Bowtie.
-4. Download the E.coli genome
-5. Index the E.coli genome with Bowtie
-
-## Installation
+## Set up the environment
 
 ### Mac OS X
 
-If you haven't already, install Homebrew (http://brew.sh/):
+If you haven't already, install [Homebrew](http://brew.sh/):
 
     ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
@@ -45,7 +51,7 @@ Now we're ready to get to work:
     mvn package install
     export ADAM_HOME=`pwd`
 
-## How to run the demo.
+## Run the demo
 
     cat $DEMO/bin/bowtie_pipe_single.scala | $ADAM_HOME/bin/adam-shell
     cat $DEMO/build/data/reads.sam | md5sum
