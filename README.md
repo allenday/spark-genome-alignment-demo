@@ -61,3 +61,12 @@ Now we're ready to get to work:
     #examine the outputs
     head $DEMO/build/data/reads.sam
 
+## Further reading
+
+Have a look at [bowtie_pipe_single.scala](https://github.com/allenday/spark-genome-alignment-demo/blob/master/bin/bowtie_pipe_single.scala)
+if you're curious about how the integration is done.  We're making use of the Spark Resilient Distributed Dataset ([RDD](http://www.thecloudavenue.com/2014/01/resilient-distributed-datasets-rdd.html)) [pipe()](https://spark.apache.org/docs/1.6.0/api/java/org/apache/spark/rdd/RDD.html#pipe(scala.collection.Seq,%20scala.collection.Map,%20scala.Function1,%20scala.Function2,%20boolean)) function to send data out to a subprocess that runs Bowtie, feeds it some data, and collects the results.
+
+You can see another example from [Holden Karau](https://github.com/holdenk) of using the RDD pipe() function [here](https://github.com/databricks/learning-spark/blob/master/src/main/scala/com/oreilly/learningsparkexamples/scala/PipeExample.scala).  It's from the book [Learning Spark](http://shop.oreilly.com/product/0636920028512.do).
+
+
+
