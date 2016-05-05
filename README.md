@@ -1,5 +1,5 @@
 # spark-genome-alignment-demo
-An example of bioinformatics and bigdata tools can playing nicely together.
+An example of bioinformatics and bigdata tools nicely playing together.
 
 You can copy and paste the relevant section below (currently Mac OS X only)
 to see how the Bowtie aligner can be integrated into an interactive Spark
@@ -7,7 +7,9 @@ program for doing bioinformatics work in a BigData environment.
 
 Specifically what is being done below:
 
-1. Build and install prerequisites  
+1. Build and install prerequisites
+  * Java 1.6+
+  * Apache Maven
   * package manager (as needed)
   * [Apache Spark](http://spark.apache.org/)
   * [Scala](http://www.scala-lang.org/)
