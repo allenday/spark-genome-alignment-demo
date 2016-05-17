@@ -29,7 +29,11 @@ while (my $line = <>){
 
 close( $fh1 );
 
-open( SAM, $ENV{'DEMO'}."/build/bowtie/bowtie -S ".$ENV{'DEMO'}."/build/data/NC_008253 $fq1 |" );
+my $bowtie = "/usr/local/bin/bowtie";
+if ( -f $ENV{'DEMO'}."/build/bowtie/bowtie" ) {
+  $bowtie = $ENV{'DEMO'}."/build/bowtie/bowtie";
+}
+open( SAM, "$bowtie -S ".$ENV{'DEMO'}."/build/data/NC_008253 $fq1 |" );
 while ( my $line = <SAM> ) {
   warn $line;
   print $line;

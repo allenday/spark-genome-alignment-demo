@@ -1,5 +1,5 @@
 # spark-genome-alignment-demo
-An example of bioinformatics and bigdata tools can playing nicely together.
+An example of bioinformatics and bigdata tools nicely playing together.
 
 You can copy and paste the relevant section below (currently Mac OS X only)
 to see how the Bowtie aligner can be integrated into an interactive Spark
@@ -7,7 +7,10 @@ program for doing bioinformatics work in a BigData environment.
 
 Specifically what is being done below:
 
-1. Build and install prerequisites  
+1. Build and install prerequisites
+  * Java 1.6+
+  * Apache Maven
+  * perl JSON (`sudo cpan JSON`)
   * package manager (as needed)
   * [Apache Spark](http://spark.apache.org/)
   * [Scala](http://www.scala-lang.org/)
@@ -37,11 +40,19 @@ Now we're ready to get to work:
     export DEMO=`pwd`
     mkdir -p build/data
     cd $DEMO/build
-    git clone https://github.com/BenLangmead/bowtie.git
-    cd $DEMO/build/bowtie
-    make
-    ./bowtie-build genomes/NC_008253.fna $DEMO/build/data/NC_008253
-    cat genomes/NC_008253.fna | sort | tail -50 | perl -ne 'chomp;$q=$_;$q=~s/./B/g;printf qq(\@read%i\n%s\n+\n%s\n), ($., $_, $q)' > $DEMO/build/data/reads.fq
+
+    #save time on mac, just use the pre-built bowtie from homebrew
+    brew install homebrew/science/bowtie
+    bowtie-build /usr/local/Cellar//bowtie/1.1.2_1/share/bowtie/genomes/NC_008253.fna $DEMO/build/data/NC_008253
+    cat /usr/local/Cellar//bowtie/1.1.2_1/share/bowtie/genomes/NC_008253.fna | sort | tail -50 | perl -ne 'chomp;$q=$_;$q=~s/./B/g;printf qq(\@read%i\n%s\n+\n%s\n), ($., $_, $q)' > $DEMO/build/data/reads.fq
+
+    #or do it from source...
+    #git clone https://github.com/BenLangmead/bowtie.git
+    #cd $DEMO/build/bowtie
+    #make
+    #./bowtie-build genomes/NC_008253.fna $DEMO/build/data/NC_008253
+    #cat genomes/NC_008253.fna | sort | tail -50 | perl -ne 'chomp;$q=$_;$q=~s/./B/g;printf qq(\@read%i\n%s\n+\n%s\n), ($., $_, $q)' > $DEMO/build/data/reads.fq
+
     #verify bowtie functions as expected
     cat $DEMO/build/data/reads.fq | ./bowtie $DEMO/build/data/NC_008253 - | md5sum
     #should yield ecd5e41dea9692446fa4ae4170d6a1e1
@@ -55,6 +66,7 @@ Now we're ready to get to work:
 ## Run the demo
 
     cat $DEMO/bin/bowtie_pipe_single.scala | $ADAM_HOME/bin/adam-shell
+    reset
     cat $DEMO/build/data/reads.sam | md5sum
     #should yield 6eebbde8d7818136e9ab924d57af8005
 
