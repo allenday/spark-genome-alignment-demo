@@ -43,18 +43,18 @@ Now we're ready to get to work:
 
     #save time on mac, just use the pre-built bowtie from homebrew
     brew install homebrew/science/bowtie
-    bowtie-build /usr/local/Cellar//bowtie/1.1.2_1/share/bowtie/genomes/NC_008253.fna $DEMO/build/data/NC_008253
-    cat /usr/local/Cellar//bowtie/1.1.2_1/share/bowtie/genomes/NC_008253.fna | sort | tail -50 | perl -ne 'chomp;$q=$_;$q=~s/./B/g;printf qq(\@read%i\n%s\n+\n%s\n), ($., $_, $q)' > $DEMO/build/data/reads.fq
+    bowtie-build data/NC_008253.fna $DEMO/build/data/NC_008253
+    cat $DEMO/data/NC_008253.fna | sort | tail -50 | perl -ne 'chomp;$q=$_;$q=~s/./B/g;printf qq(\@read%i\n%s\n+\n%s\n), ($., $_, $q)' > $DEMO/build/data/reads.fq
 
     #or do it from source...
     #git clone https://github.com/BenLangmead/bowtie.git
     #cd $DEMO/build/bowtie
     #make
     #./bowtie-build genomes/NC_008253.fna $DEMO/build/data/NC_008253
-    #cat genomes/NC_008253.fna | sort | tail -50 | perl -ne 'chomp;$q=$_;$q=~s/./B/g;printf qq(\@read%i\n%s\n+\n%s\n), ($., $_, $q)' > $DEMO/build/data/reads.fq
+    #cat $DEMO/data/NC_008253.fna | sort | tail -50 | perl -ne 'chomp;$q=$_;$q=~s/./B/g;printf qq(\@read%i\n%s\n+\n%s\n), ($., $_, $q)' > $DEMO/build/data/reads.fq
 
     #verify bowtie functions as expected
-    cat $DEMO/build/data/reads.fq | ./bowtie $DEMO/build/data/NC_008253 - | md5sum
+    cat $DEMO/build/data/reads.fq | bowtie $DEMO/build/data/NC_008253 - | md5sum
     #should yield ecd5e41dea9692446fa4ae4170d6a1e1
     cd $DEMO/build
     git clone https://github.com/bigdatagenomics/adam.git
