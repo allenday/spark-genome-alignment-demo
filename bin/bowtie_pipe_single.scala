@@ -45,4 +45,4 @@ val samRecords = samLineStrings.map( x => x.split("\t") ).map( x => {
 } )
 
 val alignmentRecords = samRecords.map(x=>samRecordConverter.convert(x,sd,rg))
-alignmentRecords.adamSAMSave(sys.env("DEMO")+"/build/data/reads.sam",sd,rg,asSam=true,asSingleFile=true)
+alignmentRecords.saveAsSam(sys.env("DEMO")+"/build/data/reads.sam",sd,rg,asSam=true,asSingleFile=true)
